@@ -25,29 +25,29 @@ failFactor$factor <- factor(failFactor$factor, level = c("badCondition", "tempta
                                                                    "methodUncertainty", "boring", "slightEffect", "ETC"))
 failFactor$type <- factor(failFactor$type, level = c("total", "youtube", "app", "alone"))
 failFactor$score <- as.numeric(failFactor$score)
-factorLabel <- c("badCondition", "temptation", "bothering", "lackOfTime", 
-                 "methodUncertainty", "boring", "slightEffect", "ETC") # Label should be revised!!!
+factorLabel <- c("Bad condition", "Temptation", "Bothering", "Lack of Time", 
+                 "An uncertain way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
 
 p <- ggplot(failFactor, aes(x=factor, y=score, fill=type, label = score)) +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_x_discrete(labels = factorLabel) +
-  scale_fill_manual(name = "Method", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
-  labs(title="Factors that participants could not do YOGA as planned", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+  labs(title="", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
 # Total Only
 failFactorTotal <- subset(failFactor, type == "total")
 failFactorTotal$factor <- factor(failFactorTotal$factor, level = c("badCondition", "temptation", "bothering", "lackOfTime", 
                                                          "methodUncertainty", "boring", "slightEffect", "ETC"))
-factorLabel <- c("badCondition", "temptation", "bothering", "lackOfTime", 
-                 "methodUncertainty", "boring", "slightEffect", "ETC") # Label should be revised!!!
+factorLabel <- c("Bad condition", "Temptation", "Bothering", "Lack of Time", 
+                 "An uncertain way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
 
 p<- ggplot(data = failFactorTotal, aes(x=factor, y=score, label=score))+
   geom_bar(stat="identity", fill = "#01BFC4") +
   scale_x_discrete(labels = factorLabel) +
   geom_text(size = 5, position = "identity") +
-  labs(title="Factors that participants could not do YOGA as planned", x="", y = "Count") +
+  labs(title="", x="", y = "count") +
   theme(legend.position="none", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 print(p)
 
@@ -57,15 +57,15 @@ failFactorThree$factor <- factor(failFactorThree$factor, level = c("badCondition
                                                                    "methodUncertainty", "boring", "slightEffect", "ETC"))
 failFactorThree$type <- factor(failFactorThree$type, level = c("youtube", "app", "alone"))
 failFactorThree$score <- as.numeric(failFactorThree$score)
-factorLabel <- c("badCondition", "temptation", "bothering", "lackOfTime", 
-                 "methodUncertainty", "boring", "slightEffect", "ETC") # Label should be revised!!!
+factorLabel <- c("Bad condition", "Temptation", "Bothering", "Lack of Time", 
+                 "An uncertain way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
 
 p <- ggplot(failFactorThree, aes(x=factor, y=score, fill=type, label = score)) +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_x_discrete(labels = factorLabel) +
-  scale_fill_manual(name = "Method", labels = c("YouTube", "App", "Alone"), values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("YouTube", "App", "Alone"), values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
-  labs(title="Factors that participants could not do YOGA as planned", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+  labs(title="", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
 
@@ -78,29 +78,29 @@ successFactor$factor <- factor(successFactor$factor, level = c("pleasure", "desi
                                                          "necessityRecognition", "beMyself", "specificGoal","positiveResult", "ETC"))
 successFactor$type <- factor(successFactor$type, level = c("total", "youtube", "app", "alone"))
 successFactor$score <- as.numeric(successFactor$score)
-factorLabel <- c("pleasure", "desireProfessional", "dailyComfortable", "satisfaction", 
-                 "necessityRecognition", "beMyself", "specificGoal","positiveResult", "ETC") # Label should be revised!!!
+factorLabel <- c("Pleasure", "Desire professionality", "Daily Comfort", "Achievement", 
+                 "Awareness of necessity", "Look I desire", "Specific Goal","Positive result", "ETC") # Label should be revised!!!
 
 p <- ggplot(successFactor, aes(x=factor, y=score, fill=type, label = score)) +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_x_discrete(labels = factorLabel) +
-  scale_fill_manual(name = "Method", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
-  labs(title="Factors that participants could do YOGA as planned", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+  labs(title="", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
 # Total Only
 successFactorTotal <- subset(successFactor, type == "total")
 successFactorTotal$factor <- factor(successFactorTotal$factor, level = c("pleasure", "desireProfessional", "dailyComfortable", "satisfaction", 
                                                                "necessityRecognition", "beMyself", "specificGoal","positiveResult", "ETC"))
-factorLabel <- c("pleasure", "desireProfessional", "dailyComfortable", "satisfaction", 
-                 "necessityRecognition", "beMyself", "specificGoal","positiveResult", "ETC") # Label should be revised!!!
+factorLabel <- c("Pleasure", "Desire professionality", "Daily Comfort", "Achievement", 
+                 "Awareness of necessity", "Look I desire", "Specific Goal","Positive result", "ETC") # Label should be revised!!!
 
 p<- ggplot(data = successFactorTotal, aes(x=factor, y=score, label=score))+
   geom_bar(stat="identity", fill = "#01BFC4") +
   scale_x_discrete(labels = factorLabel) +
   geom_text(size = 5, position = "identity") +
-  labs(title="Factors that participants could do YOGA as planned", x="", y = "Count") +
+  labs(title="", x="", y = "count") +
   theme(legend.position="none", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 print(p)
 
@@ -110,15 +110,15 @@ successFactorThree$factor <- factor(successFactorThree$factor, level = c("pleasu
                                                                          "necessityRecognition", "beMyself", "specificGoal","positiveResult", "ETC"))
 successFactorThree$type <- factor(successFactorThree$type, level = c("youtube", "app", "alone"))
 successFactorThree$score <- as.numeric(successFactorThree$score)
-factorLabel <- c("pleasure", "desireProfessional", "dailyComfortable", "satisfaction", 
-                 "necessityRecognition", "beMyself", "specificGoal","positiveResult", "ETC") # Label should be revised!!!
+factorLabel <- c("Pleasure", "Desire professionality", "Daily Comfort", "Achievement", 
+                 "Awareness of necessity", "Look I desire", "Specific Goal","Positive result", "ETC") # Label should be revised!!!
 
 p <- ggplot(successFactorThree, aes(x=factor, y=score, fill=type, label = score)) +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_x_discrete(labels = factorLabel) +
-  scale_fill_manual(name = "Method", labels = c("YouTube", "App", "Alone"), values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("YouTube", "App", "Alone"), values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
-  labs(title="Factors that participants could do YOGA as planned", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+  labs(title="", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
 ### 5-points Likert Scale Visualization
@@ -158,39 +158,39 @@ length(which(likertScale$type=="alone"))
 likertScaleWithTotal <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleWithTotal.csv", header=T, fileEncoding="UTF-8-BOM")
 likertScaleWithTotal <-likertScaleWithTotal[,c(1:3)]
 likertScaleWithTotal$type <- factor(likertScaleWithTotal$type, level = c("total", "youtube", "app", "alone"))
-factorLabel <- c("total", "youtube", "app", "alone") # Label should be revised!!!
+factorLabel <- c("Total", "YouTube", "App", "Alone") # Label should be revised!!!
 
 p <- ggplot(likertScaleWithTotal, aes(x=type, y=score, fill = type)) + geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) +
   scale_x_discrete(labels = factorLabel) +
-  scale_fill_manual(name = "Method", labels = c("Total", "YouTube", "App", "Alone"), values = c("total"="#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total"="#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_point(aes(color = type), position=position_jitterdodge(), show.legend = F) +
   scale_color_manual(values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38"))+
   #scale_color_manual(values = c("#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4")) +
-  labs(title="A measure of how well YOGA went as originally planned", x="", y = "Score") +
-  theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
+  labs(title="", x="", y = "score") +
+  theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "")
 p
 
 # Boxplot - Total Only
 p <- ggplot(likertScale, aes(x=total, y=score)) + geom_boxplot(fill="#01BFC4", alpha=0.4, outlier.color = 'black',outlier.shape = 2) +
-  scale_x_discrete(labels = "total") +
+  scale_x_discrete(labels = "Total") +
   geom_point(aes(color = total), position=position_jitterdodge(), show.legend = F) +
   scale_color_manual(values = "#01BFC4")+
-  labs(title="A measure of how well YOGA went as originally planned", x="", y = "Score") +
+  labs(title="", x="", y = "score") +
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 p
 
 # Boxplot - 3 factors Only (youtube, app, alone)
 likertScale$type <- factor(likertScale$type, level = c("youtube", "app", "alone"))
-factorLabel <- c("youtube", "app", "alone") # Label should be revised!!!
+factorLabel <- c("YouTube", "App", "Alone") # Label should be revised!!!
 
 p <- ggplot(likertScale, aes(x=type, y=score, fill = type)) + geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) +
   scale_x_discrete(labels = factorLabel) +
-  scale_fill_manual(name = "Method", labels = c("YouTube", "App", "Alone"), values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("YouTube", "App", "Alone"), values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_point(aes(color = type), position=position_jitterdodge(), show.legend = F) +
   scale_color_manual(values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38"))+
   #scale_color_manual(values = c("#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4")) +
-  labs(title="A measure of how well YOGA went as originally planned", x="", y = "Score") +
-  theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
+  labs(title="", x="", y = "score") +
+  theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "")
 p
 
 #################
@@ -213,7 +213,7 @@ os_summary$ciVal = as.numeric(os_summary$ciVal)
 
 # Default bar plot with 95% confidence level error bar
 os_summary$type <- factor(os_summary$type)
-satisfactionLabel <- "Overall"
+satisfactionLabel <- "Total"
 p <- ggplot(os_summary, aes(x=type, y=meanVal)) + 
   geom_bar(stat="identity", position=position_dodge(), fill = "#01BFC4") +
   geom_errorbar(aes(ymin=meanVal-ciVal, ymax=meanVal+ciVal), width=.2,position=position_dodge(.9)) +
@@ -221,7 +221,7 @@ p <- ggplot(os_summary, aes(x=type, y=meanVal)) +
   scale_x_discrete(labels = satisfactionLabel) +
   coord_cartesian(ylim = c(1, 5)) +
   #scale_fill_manual(values = "#01BFC4")+
-  labs(title="A measure of how well YOGA went as originally planned", x="", y = "Score") +
+  labs(title="", x="", y = "score") +
   theme(legend.position="none", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
