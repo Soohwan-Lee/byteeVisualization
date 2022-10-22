@@ -13,18 +13,20 @@ library(dplyr)
 ### Set File Path for Window Environment
 setwd('C:/Users/LeeSooHwan/Desktop/github/byteeVisualization')
 ### Set File Path for Mac Environment
-#setwd("/Users/Soohwan/Desktop/DataVisualization-ZoomProj")
+setwd("/Users/Soohwan/Desktop/github/byteeVisualization")
 
 
 ### failFactor Visualization
 # Load Whole Data
 failFactor <- read.csv(file = "./data/backgroundResearch/revisedData/failFactor.csv", header=T, fileEncoding="UTF-8-BOM")
 
-# Everything Visualization
+# Set Variables
 failFactor$factor <- factor(failFactor$factor, level = c("badCondition", "temptation", "bothering", "lackOfTime", 
                                                                    "methodUncertainty", "boring", "slightEffect", "ETC"))
 failFactor$type <- factor(failFactor$type, level = c("total", "youtube", "app", "alone"))
 failFactor$score <- as.numeric(failFactor$score)
+
+# Everything Visualization
 factorLabel <- c("Bad condition", "Temptation", "Bothering", "Lack of Time", 
                  "An uncertain way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
 
@@ -153,6 +155,17 @@ shapiro.test(likertScaleAlone$score)    # Alone
 length(which(likertScale$type=="youtube"))
 length(which(likertScale$type=="app"))
 length(which(likertScale$type=="alone"))
+
+# Composition Plot
+methodComposition <- read.csv(file = "./data/backgroundResearch/revisedData/methodComposition.csv", header=T, fileEncoding="UTF-8-BOM")
+methodComposition$method <- factor(methodComposition$method, level = c("youtube", "app", "alone"))
+factorLabel <- c("YouTube", "App", "Alone") # Label should be revised!!!
+
+p <- ggplot(methodComposition, aes("", fill=method)) + geom_bar(position="fill") +
+  labs(title="", x="Total", y = "%") +
+  scale_fill_discrete(name = "Method", labels = factorLabel) #+
+  #coord_polar(theta = "y")
+p
 
 # Boxplot - Whole
 likertScaleWithTotal <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleWithTotal.csv", header=T, fileEncoding="UTF-8-BOM")
