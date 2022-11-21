@@ -18,7 +18,7 @@ setwd("/Users/Soohwan/Desktop/github/byteeVisualization")
 
 ### failFactor Visualization
 # Load Whole Data
-failFactor <- read.csv(file = "./data/backgroundResearch/revisedData/failFactor.csv", header=T, fileEncoding="UTF-8-BOM")
+failFactor <- read.csv(file = "./data/backgroundResearch/revisedData/failFactor_44.csv", header=T, fileEncoding="UTF-8-BOM")
 
 # Set Variables
 failFactor$factor <- factor(failFactor$factor, level = c("badCondition", "temptation", "bothering", "lackOfTime", 
@@ -73,7 +73,7 @@ p
 
 ### successFactor Visualization
 # Load Whole Data
-successFactor <- read.csv(file = "./data/backgroundResearch/revisedData/successFactor.csv", header=T, fileEncoding="UTF-8-BOM")
+successFactor <- read.csv(file = "./data/backgroundResearch/revisedData/successFactor_44.csv", header=T, fileEncoding="UTF-8-BOM")
 
 # Everything Visualization
 successFactor$factor <- factor(successFactor$factor, level = c("pleasure", "desireProfessional", "dailyComfortable", "satisfaction", 
@@ -136,7 +136,7 @@ my_trans <- function(from=0)
 
 
 # Load Whole Data
-likertScale <- read.csv(file = "./data/backgroundResearch/revisedData/likertScale.csv", header=T, fileEncoding="UTF-8-BOM")
+likertScale <- read.csv(file = "./data/backgroundResearch/revisedData/likertScale_44.csv", header=T, fileEncoding="UTF-8-BOM")
 likertScale <-likertScale[,c(1:4)]
 likertScale$type <- as.factor(likertScale$type)
 likertScale$total <- as.factor(likertScale$total)
@@ -157,7 +157,7 @@ length(which(likertScale$type=="app"))
 length(which(likertScale$type=="alone"))
 
 # Composition Plot
-methodComposition <- read.csv(file = "./data/backgroundResearch/revisedData/methodComposition.csv", header=T, fileEncoding="UTF-8-BOM")
+methodComposition <- read.csv(file = "./data/backgroundResearch/revisedData/methodComposition_44.csv", header=T, fileEncoding="UTF-8-BOM")
 methodComposition$method <- factor(methodComposition$method, level = c("youtube", "app", "alone"))
 factorLabel <- c("YouTube", "App", "Alone") # Label should be revised!!!
 
@@ -168,7 +168,7 @@ p <- ggplot(methodComposition, aes("", fill=method)) + geom_bar(position="fill")
 p
 
 # Boxplot - Whole
-likertScaleWithTotal <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleWithTotal.csv", header=T, fileEncoding="UTF-8-BOM")
+likertScaleWithTotal <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleWithTotal_44.csv", header=T, fileEncoding="UTF-8-BOM")
 likertScaleWithTotal <-likertScaleWithTotal[,c(1:3)]
 likertScaleWithTotal$type <- factor(likertScaleWithTotal$type, level = c("total", "youtube", "app", "alone"))
 factorLabel <- c("Total", "YouTube", "App", "Alone") # Label should be revised!!!
@@ -208,7 +208,7 @@ p
 
 #################
 # Barplot - Total
-likertScaleTotalOnly <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleTotalOnly.csv", header=T, fileEncoding="UTF-8-BOM")
+likertScaleTotalOnly <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleTotalOnly_44.csv", header=T, fileEncoding="UTF-8-BOM")
 os_summary <- data.frame(matrix(ncol = 5))
 colnames(os_summary) <- c("type", "meanVal", "sdVal", "seVal", "ciVal")
 meanVal <- mean(likertScaleTotalOnly$score)
@@ -238,4 +238,5 @@ p <- ggplot(os_summary, aes(x=type, y=meanVal)) +
   theme(legend.position="none", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
-
+### Age Plot
+# temp
