@@ -207,14 +207,16 @@ p <- ggplot(likertScale, aes(x=type, y=score, fill = type)) + geom_boxplot(alpha
 p
 
 #################
-# Barplot - Total
+### Total
+# 95% Confidence Interval - Total
 likertScaleTotalOnly <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleTotalOnly_44.csv", header=T, fileEncoding="UTF-8-BOM")
 os_summary <- data.frame(matrix(ncol = 5))
 colnames(os_summary) <- c("type", "meanVal", "sdVal", "seVal", "ciVal")
 meanVal <- mean(likertScaleTotalOnly$score)
 sdVal <- sd(likertScaleTotalOnly$score)
 seVal <- sdVal/sqrt(38)
-ciVal <- 1.96*seVal
+#ciVal <- 1.96*seVal
+ciVal <- qnorm(0.975)*seVal
 os_summary <- rbind(os_summary, c("total", round(meanVal,2), round(sdVal,2), round(seVal,2), round(ciVal,2)))
 os_summary <- os_summary[-1 , ]
 row.names(os_summary) = NULL
@@ -224,11 +226,44 @@ os_summary$sdVal = as.numeric(os_summary$sdVal)
 os_summary$seVal = as.numeric(os_summary$seVal)
 os_summary$ciVal = as.numeric(os_summary$ciVal)
 
-# Default bar plot with 95% confidence level error bar
+# Default bar plot with 95% confidence level error bar  - Total
 os_summary$type <- factor(os_summary$type)
 satisfactionLabel <- "Total"
 p <- ggplot(os_summary, aes(x=type, y=meanVal)) + 
   geom_bar(stat="identity", position=position_dodge(), fill = "#01BFC4") +
+  geom_errorbar(aes(ymin=meanVal-ciVal, ymax=meanVal+ciVal), width=.2,position=position_dodge(.9)) +
+  scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
+  scale_x_discrete(labels = satisfactionLabel) +
+  coord_cartesian(ylim = c(1, 5)) +
+  #scale_fill_manual(values = "#01BFC4")+
+  labs(title="", x="", y = "score") +
+  theme(legend.position="none", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+p
+
+### YouTube
+# 95% Confidence Interval - Youtube
+likertScaleTotalOnly <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleYoutubeOnly_44.csv", header=T, fileEncoding="UTF-8-BOM")
+youtube_summary <- data.frame(matrix(ncol = 5))
+colnames(youtube_summary) <- c("type", "meanVal", "sdVal", "seVal", "ciVal")
+meanVal <- mean(likertScaleTotalOnly$score)
+sdVal <- sd(likertScaleTotalOnly$score)
+seVal <- sdVal/sqrt(38)
+#ciVal <- 1.96*seVal
+ciVal <- qnorm(0.975)*seVal
+youtube_summary <- rbind(youtube_summary, c("total", round(meanVal,2), round(sdVal,2), round(seVal,2), round(ciVal,2)))
+youtube_summary <- youtube_summary[-1 , ]
+row.names(youtube_summary) = NULL
+
+youtube_summary$meanVal = as.numeric(youtube_summary$meanVal)
+youtube_summary$sdVal = as.numeric(youtube_summary$sdVal)
+youtube_summary$seVal = as.numeric(youtube_summary$seVal)
+youtube_summary$ciVal = as.numeric(youtube_summary$ciVal)
+
+# Default bar plot with 95% confidence level error bar  - Total
+youtube_summary$type <- factor(os_summary$type)
+satisfactionLabel <- "YouTube"
+p <- ggplot(youtube_summary, aes(x=type, y=meanVal)) + 
+  geom_bar(stat="identity", position=position_dodge(), fill = "#F8766D") +
   geom_errorbar(aes(ymin=meanVal-ciVal, ymax=meanVal+ciVal), width=.2,position=position_dodge(.9)) +
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
   scale_x_discrete(labels = satisfactionLabel) +
