@@ -274,4 +274,20 @@ p <- ggplot(youtube_summary, aes(x=type, y=meanVal)) +
 p
 
 ### Age Plot
-# temp
+ageComposition <- read.csv(file = "./data/backgroundResearch/revisedData/age_44.csv", header=T, fileEncoding="UTF-8-BOM")
+ageComposition$age <- factor(ageComposition$age, level = c("10s", "20s", "30s", "40s"))
+factorLabel <- c("10s", "20s", "30s", "40s") # Label should be revised!!!
+
+p <- ggplot(ageComposition, aes("", fill=age)) + geom_bar(position="fill") +
+  labs(title="", x="Participants", y = "%") +
+  scale_fill_discrete(name = "Age", labels = factorLabel) #+
+#coord_polar(theta = "y")
+p
+
+
+v = c(23,15,5)
+k = c('1st','2nd','3rd')
+df = data.frame(rank=k,value=v)
+
+pie = ggplot(df,aes(x="",y=value,fill=rank))+geom_bar(width=10,stat='identity') + coord_polar('y',start=0)+geom_text(aes(label=value),position = position_stack(vjust=0.5))
+pie
