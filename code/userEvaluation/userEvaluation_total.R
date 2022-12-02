@@ -105,6 +105,8 @@ totalAverageS$score <- as.numeric(totalAverageS$score)
 
 ### Sphericity Test (Mauchly)
 
+
+
 #==========================
 
 ### Drawing Box Plot
@@ -184,5 +186,64 @@ totalAverageSPlot <- ggplot(totalAverageS, aes(x=period, y=score, fill=group)) +
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 totalAverageSPlot
 
-### Mixed Effect Model
-#
+
+####################################
+### Mixed Effect Model for Attention
+fit <- lmer(score ~ group * period + (1|participant), data = totalAverageA)
+soobin <- lme(score ~ group * period, random = ~ 1|participant, data = totalAverageA, na.action=na.omit)
+
+# Get ANOVA Table
+anova(fit)
+summary(fit)
+anova(soobin)
+summary(soobin)
+
+# Mixed Effect Model
+anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageA)
+summary(anova)
+
+
+### Mixed Effect Model for Relevance
+fit <- lmer(score ~ group * period + (1|participant), data = totalAverageR)
+soobin <- lme(score ~ group * period, random = ~ 1|participant, data = totalAverageR, na.action=na.omit)
+
+# Get ANOVA Table
+anova(fit)
+summary(fit)
+anova(soobin)
+summary(soobin)
+
+# Mixed Effect Model
+anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageR)
+summary(anova)
+
+
+### Mixed Effect Model for Confidence
+fit <- lmer(score ~ group * period + (1|participant), data = totalAverageC)
+soobin <- lme(score ~ group * period, random = ~ 1|participant, data = totalAverageC, na.action=na.omit)
+
+# Get ANOVA Table
+anova(fit)
+summary(fit)
+anova(soobin)
+summary(soobin)
+
+# Mixed Effect Model
+anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageC)
+summary(anova)
+
+
+### Mixed Effect Model for Satisfaction
+fit <- lmer(score ~ group * period + (1|participant), data = totalAverageS)
+soobin <- lme(score ~ group * period, random = ~ 1|participant, data = totalAverageS, na.action=na.omit)
+
+# Get ANOVA Table
+anova(fit)
+summary(fit)
+anova(soobin)
+summary(soobin)
+
+# Mixed Effect Model
+anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageS)
+summary(anova)
+anova
