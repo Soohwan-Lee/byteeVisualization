@@ -41,6 +41,19 @@ byteeAveragePF <- subset(byteeAverage, measure == 'PF')
 byteeAverageSM <- subset(byteeAverage, measure == 'SM')
 byteeAverageSS <- subset(byteeAverage, measure == 'SS')
 
+# Normality Test
+shapiro.test(subset(byteeAveragePF, period == 'first')$score)
+shapiro.test(subset(byteeAveragePF, period == 'second')$score)
+shapiro.test(subset(byteeAveragePF, period == 'third')$score)
+
+shapiro.test(subset(byteeAverageSM, period == 'first')$score)
+shapiro.test(subset(byteeAverageSM, period == 'second')$score)
+shapiro.test(subset(byteeAverageSM, period == 'third')$score)
+
+shapiro.test(subset(byteeAverageSS, period == 'first')$score)
+shapiro.test(subset(byteeAverageSS, period == 'second')$score)
+shapiro.test(subset(byteeAverageSS, period == 'third')$score)
+
 
 ### Drawing Box Plot
 # Draw Box Plot for Bytee Average
@@ -61,3 +74,33 @@ byteeAveragePlot <- ggplot(byteeAverage, aes(x=period, y=score, fill=measure)) +
   labs(title="Bytee - ARCS", x="Period", y = "Score", fill = "Measure") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 byteeAveragePlot
+
+############################
+### Mixed Effect Model
+# Mixed Effect Model
+anova <- aov(score ~ (measure*period) + Error(participant/(measure*period)), data = byteeAverage)
+summary(anova)
+anova$coefficients
+
+anova
+
+# Friedman Test for PF
+byteeAveragePF$participant <- as.factor(byteeAveragePF$participant)
+byteeAveragePF$measure <- as.factor(byteeAveragePF$measure)
+byteeAveragePF$period <- as.factor(byteeAveragePF$period)
+byteeAveragePF$score <- as.numeric(byteeAveragePF$score)
+friedman.test(score ~ period | participant, data=byteeAveragePF)
+
+# Friedman Test for SM
+byteeAverageSM$participant <- as.factor(byteeAverageSM$participant)
+byteeAverageSM$measure <- as.factor(byteeAverageSM$measure)
+byteeAverageSM$period <- as.factor(byteeAverageSM$period)
+byteeAverageSM$score <- as.numeric(byteeAverageSM$score)
+friedman.test(score ~ period | participant, data=byteeAverageSM)
+
+# Friedman Test for SS
+byteeAverageSS$participant <- as.factor(byteeAverageSS$participant)
+byteeAverageSS$measure <- as.factor(byteeAverageSS$measure)
+byteeAverageSS$period <- as.factor(byteeAverageSS$period)
+byteeAverageSS$score <- as.numeric(byteeAverageSS$score)
+friedman.test(score ~ period | participant, data=byteeAverageSS)

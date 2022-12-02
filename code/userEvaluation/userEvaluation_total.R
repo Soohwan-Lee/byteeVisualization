@@ -45,36 +45,6 @@ totalAverageR <- subset(totalAverage, measure == 'R')
 totalAverageC <- subset(totalAverage, measure == 'C')
 totalAverageS <- subset(totalAverage, measure == 'S')
 
-# Elicit each measure from each measurement
-totalAverageA_controlFirst
-totalAverageA_controlSecond
-totalAverageA_controlThird
-totalAverageA_experimentalFirst
-totalAverageA_experimentalSecond
-totalAverageA_experimentalThird
-
-totalAverageR_controlFirst
-totalAverageR_controlSecond
-totalAverageR_controlThird
-totalAverageR_experimentalFirst
-totalAverageR_experimentalSecond
-totalAverageR_experimentalThird
-
-totalAverageA_controlFirst
-totalAverageA_controlSecond
-totalAverageA_controlThird
-totalAverageA_experimentalFirst
-totalAverageA_experimentalSecond
-totalAverageA_experimentalThird
-
-totalAverageA_controlFirst
-totalAverageA_controlSecond
-totalAverageA_controlThird
-totalAverageA_experimentalFirst
-totalAverageA_experimentalSecond
-totalAverageA_experimentalThird
-
-
 # Set Factors
 totalAverageA$participant <- as.factor(totalAverageA$participant)
 totalAverageA$group <- as.factor(totalAverageA$group)
@@ -100,7 +70,39 @@ totalAverageS$measure <- as.factor(totalAverageS$measure)
 totalAverageS$period <- as.factor(totalAverageS$period)
 totalAverageS$score <- as.numeric(totalAverageS$score)
 
+
 ### Normality Test (Shapiro-wilk)
+# Test for A
+shapiro.test(subset(totalAverageA, period == 'first' & group == 'control')$score)
+shapiro.test(subset(totalAverageA, period == 'second' & group == 'control')$score)
+shapiro.test(subset(totalAverageA, period == 'third' & group == 'control')$score)
+shapiro.test(subset(totalAverageA, period == 'first' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageA, period == 'second' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageA, period == 'third' & group == 'experimental')$score)
+
+# Test for R
+shapiro.test(subset(totalAverageR, period == 'first' & group == 'control')$score)
+shapiro.test(subset(totalAverageR, period == 'second' & group == 'control')$score)
+shapiro.test(subset(totalAverageR, period == 'third' & group == 'control')$score)
+shapiro.test(subset(totalAverageR, period == 'first' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageR, period == 'second' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageR, period == 'third' & group == 'experimental')$score)
+
+# Test for C
+shapiro.test(subset(totalAverageC, period == 'first' & group == 'control')$score)
+shapiro.test(subset(totalAverageC, period == 'second' & group == 'control')$score)
+shapiro.test(subset(totalAverageC, period == 'third' & group == 'control')$score)
+shapiro.test(subset(totalAverageC, period == 'first' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageC, period == 'second' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageC, period == 'third' & group == 'experimental')$score)
+
+# Test for S
+shapiro.test(subset(totalAverageS, period == 'first' & group == 'control')$score)
+shapiro.test(subset(totalAverageS, period == 'second' & group == 'control')$score)
+shapiro.test(subset(totalAverageS, period == 'third' & group == 'control')$score)
+shapiro.test(subset(totalAverageS, period == 'first' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageS, period == 'second' & group == 'experimental')$score)
+shapiro.test(subset(totalAverageS, period == 'third' & group == 'experimental')$score)
 
 
 ### Sphericity Test (Mauchly)

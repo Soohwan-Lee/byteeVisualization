@@ -23,6 +23,7 @@ systemEvaluationAverage <- read.csv(file = "./data/userEvaluation/revisedData/sy
 systemEvaluationAverage$measure <- as.factor(systemEvaluationAverage$measure)
 systemEvaluationAverage$score <- as.numeric(systemEvaluationAverage$score)
 
+
 ### Box Plot Preparation
 # Start Y axis from n
 require(scales)
@@ -38,6 +39,11 @@ my_trans <- function(from=0)
 systemEvaluationAverageYE <- subset(systemEvaluationAverage, measure == 'YE')
 systemEvaluationAverageVI <- subset(systemEvaluationAverage, measure == 'VI')
 systemEvaluationAverageSE <- subset(systemEvaluationAverage, measure == 'SE')
+
+# Normality Test
+shapiro.test(systemEvaluationAverageYE$score)
+shapiro.test(systemEvaluationAverageVI$score)
+shapiro.test(systemEvaluationAverageSE$score)
 
 
 ### Drawing Box Plot
