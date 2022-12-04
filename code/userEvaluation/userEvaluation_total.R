@@ -1,6 +1,10 @@
 library(ggplot2)
 library(plyr)
 library(dplyr)
+library(psy)
+library(psych)
+library(MVTests)
+library(s20x)
 
 # ---------------- #
 # RED:   "#F8766D" #
@@ -16,7 +20,51 @@ setwd('C:/Users/LeeSooHwan/Desktop/github/byteeVisualization')
 setwd("/Users/Soohwan/Desktop/github/byteeVisualization")
 
 
-### Load Data
+### Reliability Analysis & Factor Analysis ###
+### A
+# Cronbach Alpha
+A <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/ARCS/totalA.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(A, panel=panel.smooth)
+cronbach(A)
+alpha(A)
+
+# KMO (Factor Analysis)
+KMO(A)
+
+
+### R
+# Cronbach Alpha
+R <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/ARCS/totalR.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(R, panel=panel.smooth)
+cronbach(R)
+alpha(R)
+
+# KMO (Factor Analysis)
+KMO(R)
+
+### C
+# Cronbach Alpha
+C <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/ARCS/totalC.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(C, panel=panel.smooth)
+cronbach(C)
+alpha(C)
+
+# KMO (Factor Analysis)
+KMO(C)
+
+
+### S
+# Cronbach Alpha
+S <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/ARCS/totalS.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(S, panel=panel.smooth)
+cronbach(S)
+alpha(S)
+
+# KMO (Factor Analysis)
+KMO(S)
+
+
+### Load Average Total Data
 # Load
 totalAverage <- read.csv(file = "./data/userEvaluation/revisedData/totalAverage.csv", header=T, fileEncoding="UTF-8-BOM")
 
@@ -105,9 +153,31 @@ shapiro.test(subset(totalAverageS, period == 'second' & group == 'experimental')
 shapiro.test(subset(totalAverageS, period == 'third' & group == 'experimental')$score)
 
 
+### Homogeneity of Variance Test (Levene)
+# Test for A
+fitA <- lm(score ~ period * group, data = totalAverageA)
+levene.test(fitA)
+
+# Test for R
+fitR <- lm(score ~ period * group, data = totalAverageR)
+levene.test(fitR)
+
+# Test for C
+fitC <- lm(score ~ period + group, data = totalAverageC)
+levene.test(fitC)
+
+# Test for S
+fitC <- lm(score ~ period + group, data = totalAverageS)
+levene.test(fitC)
+
+
 ### Sphericity Test (Mauchly)
+mauchly.test(fitA)
+mauchly.test(data=totalAverageA, score ~period)
 
 
+### Homogeneity of Variacne Test (Box)
+boxM(data=totalAverageA, group=period)
 
 #==========================
 
@@ -189,34 +259,72 @@ totalAverageSPlot <- ggplot(totalAverageS, aes(x=period, y=score, fill=group)) +
 totalAverageSPlot
 
 
+
 #############################
 ### Mixed Effect Model for A
 # Repeated measure 2 way ANOVA
 anova <- aov(score ~ group*period + Error(participant/period), data = totalAverageA)
 summary(anova)
 
-#Post-hoc Analysis
-with(totalAverageA, pairwise.t.test(score,group,paired=T,p.adjust.method="bonferroni"))
+# Friedman Test for experimental
+totalAverageA_experimental = subset(totalAverageA, group == 'experimental')
+totalAverageA_experimental$score <- as.numeric(totalAverageA_experimental$score)
+totalAverageA_experimental$period <- factor(totalAverageA_experimental$period)
+totalAverageA_experimental$participant <- factor(totalAverageA_experimental$participant)
+friedman.test(score ~ period | participant, data=totalAverageA_experimental)
 
-# Mixed Effect Model
-anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageA)
-summary(anova)
+# Post-hoc for Friedman Test
+pairwise.wilcox.test(totalAverageA_experimental$score, totalAverageA_experimental$period, p.adjust='bonferroni')
+
 
 #############################
 ### Mixed Effect Model for R
-# Mixed Effect Model
-anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageR)
+# Repeated measure 2 way ANOVA
+anova <- aov(score ~ (group*period) + Error(participant/period), data = totalAverageR)
 summary(anova)
+
+# Friedman Test for experimental
+totalAverageR_experimental = subset(totalAverageR, group == 'experimental')
+totalAverageR_experimental$score <- as.numeric(totalAverageR_experimental$score)
+totalAverageR_experimental$period <- factor(totalAverageR_experimental$period)
+totalAverageR_experimental$participant <- factor(totalAverageR_experimental$participant)
+friedman.test(score ~ period | participant, data=totalAverageR_experimental)
+
+# Post-hoc for Friedman Test
+pairwise.wilcox.test(totalAverageR_experimental$score, totalAverageR_experimental$period, p.adjust='bonferroni')
+
 
 #############################
 ### Mixed Effect Model for C
-# Mixed Effect Model
-anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageC)
+# Repeated measure 2 way ANOVA
+anova <- aov(score ~ (group*period) + Error(participant/period), data = totalAverageC)
 summary(anova)
+
+# Friedman Test for experimental
+totalAverageC_experimental = subset(totalAverageC, group == 'experimental')
+totalAverageC_experimental$score <- as.numeric(totalAverageC_experimental$score)
+totalAverageC_experimental$period <- factor(totalAverageC_experimental$period)
+totalAverageC_experimental$participant <- factor(totalAverageC_experimental$participant)
+friedman.test(score ~ period | participant, data=totalAverageC_experimental)
+
+# Post-hoc for Friedman Test
+pairwise.wilcox.test(totalAverageC_experimental$score, totalAverageC_experimental$period, p.adjust='bonferroni')
+
 
 ############################
 ### Mixed Effect Model for S
-# Mixed Effect Model
-anova <- aov(score ~ (group*period) + Error(participant/(group*period)), data = totalAverageS)
+# Repeated measure 2 way ANOVA
+anova <- aov(score ~ (group*period) + Error(participant/period), data = totalAverageS)
 summary(anova)
 anova
+
+# Friedman Test for experimental
+totalAverageS_experimental = subset(totalAverageS, group == 'experimental')
+totalAverageS_experimental$score <- as.numeric(totalAverageS_experimental$score)
+totalAverageS_experimental$period <- factor(totalAverageS_experimental$period)
+totalAverageS_experimental$participant <- factor(totalAverageS_experimental$participant)
+friedman.test(score ~ period | participant, data=totalAverageS_experimental)
+
+# Post-hoc for Friedman Test
+pairwise.wilcox.test(totalAverageS_experimental$score, totalAverageS_experimental$period, p.adjust='bonferroni')
+

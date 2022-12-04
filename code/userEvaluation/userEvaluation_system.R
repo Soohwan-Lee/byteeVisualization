@@ -1,6 +1,8 @@
 library(ggplot2)
 library(plyr)
 library(dplyr)
+library(psych)
+
 
 # ---------------- #
 # RED:   "#F8766D" #
@@ -14,6 +16,30 @@ library(dplyr)
 setwd('C:/Users/LeeSooHwan/Desktop/github/byteeVisualization')
 ### Set File Path for Mac Environment
 setwd("/Users/Soohwan/Desktop/github/byteeVisualization")
+
+
+### Reliability Analysis & Factor Analysis
+# YE
+YE <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/systemEvaluation/YE.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(YE, panel=panel.smooth)
+cronbach(YE) # Cronbach Aplha
+alpha(YE) # Cronbach Aplha
+KMO(YE) # KMO
+
+# VI
+VI <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/systemEvaluation/VI.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(VI, panel=panel.smooth)
+cronbach(VI) # Cronbach Aplha
+alpha(VI) # Cronbach Aplha
+KMO(VI) # KMO
+
+# SE
+SE <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/systemEvaluation/SE.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(SE, panel=panel.smooth)
+cronbach(SE) # Cronbach Aplha
+alpha(SE) # Cronbach Aplha
+KMO(SE) # KMO
+
 
 ### Load Data
 # Load

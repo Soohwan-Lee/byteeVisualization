@@ -1,6 +1,8 @@
 library(ggplot2)
 library(plyr)
 library(dplyr)
+library(psych)
+
 
 # ---------------- #
 # RED:   "#F8766D" #
@@ -14,6 +16,30 @@ library(dplyr)
 setwd('C:/Users/LeeSooHwan/Desktop/github/byteeVisualization')
 ### Set File Path for Mac Environment
 setwd("/Users/Soohwan/Desktop/github/byteeVisualization")
+
+
+### Reliability Analysis & Factor Analysis
+# PF
+PF <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/bytee/PF.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(PF, panel=panel.smooth)
+cronbach(PF) # Cronbach Alpha
+alpha(PF) # Cronbach Alpha
+KMO(PF) # KMO
+
+# SM
+SM <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/bytee/SM.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(SM, panel=panel.smooth)
+cronbach(SM) # Cronbach Alpha
+alpha(SM) # Cronbach Alpha
+KMO(SM) # KMO
+
+# SS
+SS <- read.csv(file = "./data/userEvaluation/revisedData/cronbach/bytee/SS.csv", header=T, fileEncoding="UTF-8-BOM")
+pairs(SS, panel=panel.smooth)
+cronbach(SS) # Cronbach Alpha
+alpha(SS) # Cronbach Alpha
+KMO(SS) # KMO
+
 
 ### Load Data
 # Load
@@ -41,7 +67,7 @@ byteeAveragePF <- subset(byteeAverage, measure == 'PF')
 byteeAverageSM <- subset(byteeAverage, measure == 'SM')
 byteeAverageSS <- subset(byteeAverage, measure == 'SS')
 
-# Normality Test
+### Normality Test
 shapiro.test(subset(byteeAveragePF, period == 'first')$score)
 shapiro.test(subset(byteeAveragePF, period == 'second')$score)
 shapiro.test(subset(byteeAveragePF, period == 'third')$score)
@@ -53,6 +79,19 @@ shapiro.test(subset(byteeAverageSM, period == 'third')$score)
 shapiro.test(subset(byteeAverageSS, period == 'first')$score)
 shapiro.test(subset(byteeAverageSS, period == 'second')$score)
 shapiro.test(subset(byteeAverageSS, period == 'third')$score)
+
+### Homogeneity of Variance Test (Levene)
+# Test for PF
+fitPF <- lm(score ~ period, data = byteeAveragePF)
+levene.test(fitPF)
+
+# Test for SM
+fitSM <- lm(score ~ period, data = byteeAverageSM)
+levene.test(fitSM)
+
+# Test for SS
+fitSS <- lm(score ~ period, data = byteeAverageSS)
+levene.test(fitSS)
 
 
 ### Drawing Box Plot
@@ -84,23 +123,34 @@ anova$coefficients
 
 anova
 
-# Friedman Test for PF
+# Friedman Test & Post-hoc Test for PF
 byteeAveragePF$participant <- as.factor(byteeAveragePF$participant)
 byteeAveragePF$measure <- as.factor(byteeAveragePF$measure)
 byteeAveragePF$period <- as.factor(byteeAveragePF$period)
 byteeAveragePF$score <- as.numeric(byteeAveragePF$score)
+anova <- aov(score ~ period + Error(participant/period) , data = byteeAveragePF)
+summary(anova)
 friedman.test(score ~ period | participant, data=byteeAveragePF)
+pairwise.wilcox.test(byteeAveragePF$score, byteeAveragePF$period, p.adjust='bonferroni')
 
-# Friedman Test for SM
+
+# Friedman Test & Post-hoc Test for SM
 byteeAverageSM$participant <- as.factor(byteeAverageSM$participant)
 byteeAverageSM$measure <- as.factor(byteeAverageSM$measure)
 byteeAverageSM$period <- as.factor(byteeAverageSM$period)
 byteeAverageSM$score <- as.numeric(byteeAverageSM$score)
-friedman.test(score ~ period | participant, data=byteeAverageSM)
+anova <- aov(score ~ period + Error(participant/period) , data = byteeAverageSM)
+summary(anova) # RM one-way ANOVA
+friedman.test(score ~ period | participant, data=byteeAverageSM) # Friedman Test
+pairwise.wilcox.test(byteeAverageSM$score, byteeAverageSM$period, p.adjust='bonferroni') # post-hoc
 
-# Friedman Test for SS
+
+# Friedman Test & Post-hoc Test for SS
 byteeAverageSS$participant <- as.factor(byteeAverageSS$participant)
 byteeAverageSS$measure <- as.factor(byteeAverageSS$measure)
 byteeAverageSS$period <- as.factor(byteeAverageSS$period)
 byteeAverageSS$score <- as.numeric(byteeAverageSS$score)
+anova <- aov(score ~ period + Error(participant/period) , data = byteeAverageSS)
+summary(anova)
 friedman.test(score ~ period | participant, data=byteeAverageSS)
+pairwise.wilcox.test(byteeAverageSS$score, byteeAverageSS$period, p.adjust='bonferroni')
