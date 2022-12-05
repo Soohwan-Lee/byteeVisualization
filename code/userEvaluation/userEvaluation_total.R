@@ -167,8 +167,8 @@ fitC <- lm(score ~ period + group, data = totalAverageC)
 levene.test(fitC)
 
 # Test for S
-fitC <- lm(score ~ period + group, data = totalAverageS)
-levene.test(fitC)
+fitS <- lm(score ~ period + group, data = totalAverageS)
+levene.test(fitS)
 
 
 ### Sphericity Test (Mauchly)
@@ -273,6 +273,10 @@ totalAverageA_experimental$period <- factor(totalAverageA_experimental$period)
 totalAverageA_experimental$participant <- factor(totalAverageA_experimental$participant)
 friedman.test(score ~ period | participant, data=totalAverageA_experimental)
 
+# RM one-way ANOVA
+anova <- aov(score ~ period + Error(participant/period), data = totalAverageA_experimental)
+summary(anova)
+
 # Post-hoc for Friedman Test
 pairwise.wilcox.test(totalAverageA_experimental$score, totalAverageA_experimental$period, p.adjust='bonferroni')
 
@@ -289,6 +293,10 @@ totalAverageR_experimental$score <- as.numeric(totalAverageR_experimental$score)
 totalAverageR_experimental$period <- factor(totalAverageR_experimental$period)
 totalAverageR_experimental$participant <- factor(totalAverageR_experimental$participant)
 friedman.test(score ~ period | participant, data=totalAverageR_experimental)
+
+# RM one-way ANOVA
+anova <- aov(score ~ period + Error(participant/period), data = totalAverageR_experimental)
+summary(anova)
 
 # Post-hoc for Friedman Test
 pairwise.wilcox.test(totalAverageR_experimental$score, totalAverageR_experimental$period, p.adjust='bonferroni')
@@ -307,6 +315,10 @@ totalAverageC_experimental$period <- factor(totalAverageC_experimental$period)
 totalAverageC_experimental$participant <- factor(totalAverageC_experimental$participant)
 friedman.test(score ~ period | participant, data=totalAverageC_experimental)
 
+# RM one-way ANOVA
+anova <- aov(score ~ period + Error(participant/period), data = totalAverageC_experimental)
+summary(anova)
+
 # Post-hoc for Friedman Test
 pairwise.wilcox.test(totalAverageC_experimental$score, totalAverageC_experimental$period, p.adjust='bonferroni')
 
@@ -324,6 +336,10 @@ totalAverageS_experimental$score <- as.numeric(totalAverageS_experimental$score)
 totalAverageS_experimental$period <- factor(totalAverageS_experimental$period)
 totalAverageS_experimental$participant <- factor(totalAverageS_experimental$participant)
 friedman.test(score ~ period | participant, data=totalAverageS_experimental)
+
+# RM one-way ANOVA
+anova <- aov(score ~ period + Error(participant/period), data = totalAverageS_experimental)
+summary(anova)
 
 # Post-hoc for Friedman Test
 pairwise.wilcox.test(totalAverageS_experimental$score, totalAverageS_experimental$period, p.adjust='bonferroni')
