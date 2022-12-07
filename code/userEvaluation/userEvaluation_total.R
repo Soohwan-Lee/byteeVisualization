@@ -187,8 +187,8 @@ totalAverageA$score <- as.numeric(totalAverageA$score)
 totalAverageA$period <- factor(totalAverageA$period, level = c("first", "second", "third"))
 totalAverageA$group <- factor(totalAverageA$group, level = c("control", "experimental"))
 
-periodLabel <- c("First","Second", "Third") # Label should be revised!!!
-groupLabel <- c("Control Group","Experimental Group") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageAPlot <- ggplot(totalAverageA, aes(x=period, y=score, fill=group)) + 
   geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) + 
@@ -197,7 +197,7 @@ totalAverageAPlot <- ggplot(totalAverageA, aes(x=period, y=score, fill=group)) +
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
   coord_cartesian(ylim = c(1, 5)) +
   geom_point(aes(colour = group), position=position_jitterdodge(), show.legend = F) +
-  labs(title="Total - Attention", x="Period", y = "Score", fill = "Group") + 
+  labs(title="Attention", x="Period", y = "Score", fill = "Group") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 totalAverageAPlot
 
@@ -206,8 +206,8 @@ totalAverageR$score <- as.numeric(totalAverageR$score)
 totalAverageR$period <- factor(totalAverageR$period, level = c("first", "second", "third"))
 totalAverageR$group <- factor(totalAverageR$group, level = c("control", "experimental"))
 
-periodLabel <- c("First","Second", "Third") # Label should be revised!!!
-groupLabel <- c("Control Group","Experimental Group") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageRPlot <- ggplot(totalAverageR, aes(x=period, y=score, fill=group)) + 
   geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) + 
@@ -216,7 +216,7 @@ totalAverageRPlot <- ggplot(totalAverageR, aes(x=period, y=score, fill=group)) +
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
   coord_cartesian(ylim = c(1, 5)) +
   geom_point(aes(colour = group), position=position_jitterdodge(), show.legend = F) +
-  labs(title="Total - Relevance", x="Period", y = "Score", fill = "Group") + 
+  labs(title="Relevance", x="Period", y = "Score", fill = "Group") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 totalAverageRPlot
 
@@ -225,8 +225,8 @@ totalAverageC$score <- as.numeric(totalAverageC$score)
 totalAverageC$period <- factor(totalAverageC$period, level = c("first", "second", "third"))
 totalAverageC$group <- factor(totalAverageC$group, level = c("control", "experimental"))
 
-periodLabel <- c("First","Second", "Third") # Label should be revised!!!
-groupLabel <- c("Control Group","Experimental Group") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageCPlot <- ggplot(totalAverageC, aes(x=period, y=score, fill=group)) + 
   geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) + 
@@ -235,7 +235,7 @@ totalAverageCPlot <- ggplot(totalAverageC, aes(x=period, y=score, fill=group)) +
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
   coord_cartesian(ylim = c(1, 5)) +
   geom_point(aes(colour = group), position=position_jitterdodge(), show.legend = F) +
-  labs(title="Total - Confidence", x="Period", y = "Score", fill = "Group") + 
+  labs(title="Confidence", x="Period", y = "Score", fill = "Group") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 totalAverageCPlot
 
@@ -244,8 +244,8 @@ totalAverageS$score <- as.numeric(totalAverageS$score)
 totalAverageS$period <- factor(totalAverageS$period, level = c("first", "second", "third"))
 totalAverageS$group <- factor(totalAverageS$group, level = c("control", "experimental"))
 
-periodLabel <- c("First","Second", "Third") # Label should be revised!!!
-groupLabel <- c("Control Group","Experimental Group") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageSPlot <- ggplot(totalAverageS, aes(x=period, y=score, fill=group)) + 
   geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) + 
@@ -254,7 +254,7 @@ totalAverageSPlot <- ggplot(totalAverageS, aes(x=period, y=score, fill=group)) +
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
   coord_cartesian(ylim = c(1, 5)) +
   geom_point(aes(colour = group), position=position_jitterdodge(), show.legend = F) +
-  labs(title="Total - Satisfaction", x="Period", y = "Score", fill = "Group") + 
+  labs(title="Satisfaction", x="Period", y = "Score", fill = "Group") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 totalAverageSPlot
 

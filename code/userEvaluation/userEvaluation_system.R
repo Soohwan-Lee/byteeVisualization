@@ -77,7 +77,7 @@ shapiro.test(systemEvaluationAverageSE$score)
 systemEvaluationAverage$score <- as.numeric(systemEvaluationAverage$score)
 systemEvaluationAverage$measure <- factor(systemEvaluationAverage$measure, level = c("YE", "VI", "SE"))
 
-measureLabel <- c("YE","VI", "SE") # Label should be revised!!!
+measureLabel <- c("Yoga Satisfaction","Visual Imagery", "System Satisfaction") # Label should be revised!!!
 
 systemEvaluationAveragePlot <- ggplot(systemEvaluationAverage, aes(x=measure, y=score, fill = measure)) + 
   geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) + 
@@ -85,6 +85,7 @@ systemEvaluationAveragePlot <- ggplot(systemEvaluationAverage, aes(x=measure, y=
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5,6,7)) + 
   coord_cartesian(ylim = c(1, 7)) +
   geom_point(aes(colour = measure), position=position_jitterdodge(), show.legend = F) +
-  labs(title="Bytee - System Evaluation", x="Measure", y = "Score") + 
+  labs(title="System Evaluation", x="Measure", y = "Score") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "")
 systemEvaluationAveragePlot
+

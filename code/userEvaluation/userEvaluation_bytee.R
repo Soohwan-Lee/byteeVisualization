@@ -100,8 +100,10 @@ byteeAverage$score <- as.numeric(byteeAverage$score)
 byteeAverage$period <- factor(byteeAverage$period, level = c("first", "second", "third"))
 byteeAverage$measure <- factor(byteeAverage$measure, level = c("PF", "SM", "SS"))
 
-periodLabel <- c("First","Second", "Third") # Label should be revised!!!
-measureLabel <- c("PF","SM", "SS") # Label should be revised!!!
+periodLabel <- c("1st Time","5th Time", "10th Time") # Label should be revised!!!
+measureLabel <- c("Personalized\nVisual Feedback", "Visualization\nof Self-Monitoring", "Social Support\n with Visualization")
+measureLabel <- c("Personalized Visual Feedback", "Visualization of Self-Monitoring", "Social Support with Visualization")
+measureLabel <- c("Factor A","Factor B", "Factor C") # Label should be revised!!!
 
 byteeAveragePlot <- ggplot(byteeAverage, aes(x=period, y=score, fill=measure)) + 
   geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) + 
@@ -110,7 +112,7 @@ byteeAveragePlot <- ggplot(byteeAverage, aes(x=period, y=score, fill=measure)) +
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
   coord_cartesian(ylim = c(1, 5)) +
   geom_point(aes(colour = measure), position=position_jitterdodge(), show.legend = F) +
-  labs(title="Bytee - ARCS", x="Period", y = "Score", fill = "Measure") + 
+  labs(title="3 Factors of Bytee", x="Period", y = "Score", fill = "Measure") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "bottom")
 byteeAveragePlot
 
