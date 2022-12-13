@@ -179,6 +179,12 @@ mauchly.test(data=totalAverageA, score ~period)
 ### Homogeneity of Variacne Test (Box)
 boxM(data=totalAverageA, group=period)
 
+### Mann–Whitney U test for Pre-test
+wilcox.test(subset(totalAverageA, period == 'first' & group == 'control')$score, subset(totalAverageA, period == 'first' & group == 'experimental')$score)
+wilcox.test(subset(totalAverageR, period == 'first' & group == 'control')$score, subset(totalAverageR, period == 'first' & group == 'experimental')$score)
+wilcox.test(subset(totalAverageC, period == 'first' & group == 'control')$score, subset(totalAverageC, period == 'first' & group == 'experimental')$score)
+wilcox.test(subset(totalAverageS, period == 'first' & group == 'control')$score, subset(totalAverageS, period == 'first' & group == 'experimental')$score)
+
 #==========================
 
 ### Drawing Box Plot
@@ -187,7 +193,7 @@ totalAverageA$score <- as.numeric(totalAverageA$score)
 totalAverageA$period <- factor(totalAverageA$period, level = c("first", "second", "third"))
 totalAverageA$group <- factor(totalAverageA$group, level = c("control", "experimental"))
 
-periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(Day 5)", "Post-test(Day 10)") # Label should be revised!!!
 groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageAPlot <- ggplot(totalAverageA, aes(x=period, y=score, fill=group)) + 
@@ -206,7 +212,7 @@ totalAverageR$score <- as.numeric(totalAverageR$score)
 totalAverageR$period <- factor(totalAverageR$period, level = c("first", "second", "third"))
 totalAverageR$group <- factor(totalAverageR$group, level = c("control", "experimental"))
 
-periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(Day 5)", "Post-test(Day 10)") # Label should be revised!!!
 groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageRPlot <- ggplot(totalAverageR, aes(x=period, y=score, fill=group)) + 
@@ -225,7 +231,7 @@ totalAverageC$score <- as.numeric(totalAverageC$score)
 totalAverageC$period <- factor(totalAverageC$period, level = c("first", "second", "third"))
 totalAverageC$group <- factor(totalAverageC$group, level = c("control", "experimental"))
 
-periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(Day 5)", "Post-test(Day 10)") # Label should be revised!!!
 groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageCPlot <- ggplot(totalAverageC, aes(x=period, y=score, fill=group)) + 
@@ -244,7 +250,7 @@ totalAverageS$score <- as.numeric(totalAverageS$score)
 totalAverageS$period <- factor(totalAverageS$period, level = c("first", "second", "third"))
 totalAverageS$group <- factor(totalAverageS$group, level = c("control", "experimental"))
 
-periodLabel <- c("Pre-test","Post-test(5th Time)", "Post-test(10th Time)") # Label should be revised!!!
+periodLabel <- c("Pre-test","Post-test(Day 5)", "Post-test(Day 10)") # Label should be revised!!!
 groupLabel <- c("Control Group","Bytee Group") # Label should be revised!!!
 
 totalAverageSPlot <- ggplot(totalAverageS, aes(x=period, y=score, fill=group)) + 

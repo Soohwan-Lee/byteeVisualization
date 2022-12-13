@@ -100,10 +100,10 @@ byteeAverage$score <- as.numeric(byteeAverage$score)
 byteeAverage$period <- factor(byteeAverage$period, level = c("first", "second", "third"))
 byteeAverage$measure <- factor(byteeAverage$measure, level = c("PF", "SM", "SS"))
 
-periodLabel <- c("1st Time","5th Time", "10th Time") # Label should be revised!!!
+periodLabel <- c("Day 1","Day 5", "Day 10") # Label should be revised!!!
 measureLabel <- c("Personalized\nVisual Feedback", "Visualization\nof Self-Monitoring", "Social Support\n with Visualization")
 measureLabel <- c("Personalized Visual Feedback", "Visualization of Self-Monitoring", "Social Support with Visualization")
-measureLabel <- c("Factor A","Factor B", "Factor C") # Label should be revised!!!
+#measureLabel <- c("Factor A","Factor B", "Factor C") # Label should be revised!!!
 
 byteeAveragePlot <- ggplot(byteeAverage, aes(x=period, y=score, fill=measure)) + 
   geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) + 
