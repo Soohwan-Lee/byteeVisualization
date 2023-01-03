@@ -31,11 +31,11 @@ factorLabel <- c("Bad condition", "Temptation", "Bothering", "Lack of Time",
                  "An uncertain way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
 
 p <- ggplot(failFactor, aes(x=factor, y=score, fill=type, label = score)) +
-  geom_bar(stat="identity", position=position_dodge()) +
+  geom_bar(stat="identity", position=position_dodge(), alpha=0.4) +
   scale_x_discrete(labels = factorLabel) +
   scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
-  labs(title="", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+  labs(title="Hindrance Factors of Doing Yoga", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
 # Total Only
@@ -84,11 +84,11 @@ factorLabel <- c("Pleasure", "Desire professionality", "Daily Comfort", "Achieve
                  "Awareness of necessity", "Look I desire", "Specific Goal","Positive result", "ETC") # Label should be revised!!!
 
 p <- ggplot(successFactor, aes(x=factor, y=score, fill=type, label = score)) +
-  geom_bar(stat="identity", position=position_dodge()) +
+  geom_bar(stat="identity", position=position_dodge(), alpha=0.4) +
   scale_x_discrete(labels = factorLabel) +
   scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
-  labs(title="", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+  labs(title="Motivational Factors of Doing Yoga", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
 # Total Only
