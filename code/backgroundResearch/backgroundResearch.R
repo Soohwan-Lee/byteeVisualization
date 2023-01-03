@@ -16,6 +16,18 @@ setwd('C:/Users/LeeSooHwan/Desktop/github/byteeVisualization')
 setwd("/Users/Soohwan/Desktop/github/byteeVisualization")
 
 
+### Start y axis
+# Start Y axis from n
+require(scales)
+my_trans <- function(from=0) 
+{
+  trans <- function(x) x-from
+  inv <- function(x) x+from
+  trans_new("myscale", trans, inv, 
+            domain = c(from, Inf))
+}
+
+
 ### failFactor Visualization
 # Load Whole Data
 failFactor <- read.csv(file = "./data/backgroundResearch/revisedData/failFactor_44.csv", header=T, fileEncoding="UTF-8-BOM")
@@ -35,6 +47,9 @@ p <- ggplot(failFactor, aes(x=factor, y=score, fill=type, label = score)) +
   scale_x_discrete(labels = factorLabel) +
   scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
+  #scale_y_continuous(trans = my_trans( from=1),breaks = c(0,2,3)) + 
+  #coord_cartesian(ylim = c(1, 17)) +
+  ylim(0,20) +
   labs(title="Hindrance Factors of Doing Yoga", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
@@ -46,7 +61,7 @@ factorLabel <- c("Bad condition", "Temptation", "Bothering", "Lack of Time",
                  "An uncertain way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
 
 p<- ggplot(data = failFactorTotal, aes(x=factor, y=score, label=score))+
-  geom_bar(stat="identity", fill = "#01BFC4") +
+  geom_bar(stat="identity", fill = "#01BFC4", alpha=0.4) +
   scale_x_discrete(labels = factorLabel) +
   geom_text(size = 5, position = "identity") +
   labs(title="", x="", y = "count") +
@@ -86,8 +101,11 @@ factorLabel <- c("Pleasure", "Desire professionality", "Daily Comfort", "Achieve
 p <- ggplot(successFactor, aes(x=factor, y=score, fill=type, label = score)) +
   geom_bar(stat="identity", position=position_dodge(), alpha=0.4) +
   scale_x_discrete(labels = factorLabel) +
+  #scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
+  #coord_cartesian(ylim = c(1, 15)) +
   scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
+  ylim(0,15) +
   labs(title="Motivational Factors of Doing Yoga", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 p
 
@@ -161,9 +179,10 @@ methodComposition <- read.csv(file = "./data/backgroundResearch/revisedData/meth
 methodComposition$method <- factor(methodComposition$method, level = c("youtube", "app", "alone"))
 factorLabel <- c("YouTube", "App", "Alone") # Label should be revised!!!
 
-p <- ggplot(methodComposition, aes("", fill=method)) + geom_bar(position="fill") +
-  labs(title="", x="Total", y = "%") +
-  scale_fill_discrete(name = "Method", labels = factorLabel) #+
+p <- ggplot(methodComposition, aes("", fill=method)) + geom_bar(position="fill", alpha=0.4) +
+  labs(title="Methods of Yoga Practice", x="Total", y = "%") +
+  scale_fill_discrete(name = "Method", labels = factorLabel) +
+  theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
   #coord_polar(theta = "y")
 p
 
@@ -179,7 +198,7 @@ p <- ggplot(likertScaleWithTotal, aes(x=type, y=score, fill = type)) + geom_boxp
   geom_point(aes(color = type), position=position_jitterdodge(), show.legend = F) +
   scale_color_manual(values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38"))+
   #scale_color_manual(values = c("#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4")) +
-  labs(title="", x="", y = "score") +
+  labs(title="The Difficulty of Continuing To Do Yoga", x="", y = "score") +
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "")
 p
 
@@ -278,9 +297,11 @@ ageComposition <- read.csv(file = "./data/backgroundResearch/revisedData/age_44.
 ageComposition$age <- factor(ageComposition$age, level = c("10s", "20s", "30s", "40s"))
 factorLabel <- c("10s", "20s", "30s", "40s") # Label should be revised!!!
 
-p <- ggplot(ageComposition, aes("", fill=age)) + geom_bar(position="fill") +
-  labs(title="", x="Participants", y = "%") +
-  scale_fill_discrete(name = "Age", labels = factorLabel) #+
+p <- ggplot(ageComposition, aes("", fill=age)) + geom_bar(position="fill", alpha=0.4) +
+  labs(title="Participant Age", x="Participants", y = "%") +
+  scale_fill_manual(name = "Age", labels = factorLabel, values = c("10s" = "#f8766d","20s" = "#619cff", "30s" = "#00ba38", "40s" = "#01BFC4")) +
+  theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
+#scale_fill_discrete(name = "Age", labels = factorLabel) #+
 #coord_polar(theta = "y")
 p
 
