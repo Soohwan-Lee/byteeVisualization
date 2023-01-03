@@ -39,13 +39,13 @@ failFactor$type <- factor(failFactor$type, level = c("total", "youtube", "app", 
 failFactor$score <- as.numeric(failFactor$score)
 
 # Everything Visualization
-factorLabel <- c("Bad condition", "Temptation", "Bothering", "Lack of Time", 
-                 "An uncertain way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
+factorLabel <- c("Bad Condition", "Temptation", "Bothering", "Lack of Time", 
+                 "An Uncertain Way", "Boring", "Slight Effect", "ETC") # Label should be revised!!!
 
 p <- ggplot(failFactor, aes(x=factor, y=score, fill=type, label = score)) +
   geom_bar(stat="identity", position=position_dodge(), alpha=0.4) +
   scale_x_discrete(labels = factorLabel) +
-  scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "No service"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
   #scale_y_continuous(trans = my_trans( from=1),breaks = c(0,2,3)) + 
   #coord_cartesian(ylim = c(1, 17)) +
@@ -95,15 +95,15 @@ successFactor$factor <- factor(successFactor$factor, level = c("pleasure", "desi
                                                          "necessityRecognition", "beMyself", "specificGoal","positiveResult", "ETC"))
 successFactor$type <- factor(successFactor$type, level = c("total", "youtube", "app", "alone"))
 successFactor$score <- as.numeric(successFactor$score)
-factorLabel <- c("Pleasure", "Desire professionality", "Daily Comfort", "Achievement", 
-                 "Awareness of necessity", "Look I desire", "Specific Goal","Positive result", "ETC") # Label should be revised!!!
+factorLabel <- c("Pleasure", "Desire Professionality", "Daily Comfort", "Achievement", 
+                 "Awareness of Necessity", "The Body Shape\nI desire", "Specific Goal","Positive Result", "ETC") # Label should be revised!!!
 
 p <- ggplot(successFactor, aes(x=factor, y=score, fill=type, label = score)) +
   geom_bar(stat="identity", position=position_dodge(), alpha=0.4) +
   scale_x_discrete(labels = factorLabel) +
   #scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5)) + 
   #coord_cartesian(ylim = c(1, 15)) +
-  scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "Alone"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
+  scale_fill_manual(name = "", labels = c("Total", "YouTube", "App", "No Service"), values = c("total" = "#01BFC4", "youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   geom_text(size = 4, position=position_dodge(0.9), vjust=-0.25) +
   ylim(0,15) +
   labs(title="Motivational Factors of Doing Yoga", x="", y = "count") + theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
@@ -177,11 +177,12 @@ length(which(likertScale$type=="alone"))
 # Composition Plot
 methodComposition <- read.csv(file = "./data/backgroundResearch/revisedData/methodComposition_44.csv", header=T, fileEncoding="UTF-8-BOM")
 methodComposition$method <- factor(methodComposition$method, level = c("youtube", "app", "alone"))
-factorLabel <- c("YouTube", "App", "Alone") # Label should be revised!!!
+factorLabel <- c("YouTube", "App", "No Service") # Label should be revised!!!
 
 p <- ggplot(methodComposition, aes("", fill=method)) + geom_bar(position="fill", alpha=0.4) +
-  labs(title="Methods of Yoga Practice", x="Total", y = "%") +
-  scale_fill_discrete(name = "Method", labels = factorLabel) +
+  labs(title="Methods of Yoga Practices", x="Total", y = "%") +
+  #scale_fill_discrete(name = "Method", labels = factorLabel) +
+  scale_fill_manual(name = "Method", labels = factorLabel, values = c("youtube" = "#f8766d","app" = "#619cff", "alone" = "#00ba38")) +
   theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
   #coord_polar(theta = "y")
 p
@@ -190,7 +191,7 @@ p
 likertScaleWithTotal <- read.csv(file = "./data/backgroundResearch/revisedData/likertScaleWithTotal_44.csv", header=T, fileEncoding="UTF-8-BOM")
 likertScaleWithTotal <-likertScaleWithTotal[,c(1:3)]
 likertScaleWithTotal$type <- factor(likertScaleWithTotal$type, level = c("total", "youtube", "app", "alone"))
-factorLabel <- c("Total", "YouTube", "App", "Alone") # Label should be revised!!!
+factorLabel <- c("Total", "YouTube", "App", "No Service") # Label should be revised!!!
 
 p <- ggplot(likertScaleWithTotal, aes(x=type, y=score, fill = type)) + geom_boxplot(alpha=0.4, outlier.color = 'black',outlier.shape = 2) +
   scale_x_discrete(labels = factorLabel) +
@@ -299,7 +300,7 @@ factorLabel <- c("10s", "20s", "30s", "40s") # Label should be revised!!!
 
 p <- ggplot(ageComposition, aes("", fill=age)) + geom_bar(position="fill", alpha=0.4) +
   labs(title="Participant Age", x="Participants", y = "%") +
-  scale_fill_manual(name = "Age", labels = factorLabel, values = c("10s" = "#f8766d","20s" = "#619cff", "30s" = "#00ba38", "40s" = "#01BFC4")) +
+  scale_fill_manual(name = "Age", labels = factorLabel, values = c("10s" = "#619cff","20s" = "#f8766d", "30s" = "#00ba38", "40s" = "#01BFC4")) +
   theme(legend.position="bottom", plot.title = element_text(hjust = 0.5), text=element_text(size=15))
 #scale_fill_discrete(name = "Age", labels = factorLabel) #+
 #coord_polar(theta = "y")
